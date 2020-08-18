@@ -49,19 +49,27 @@
 <title>LOGIN</title>
 </head>
 <body>
-	<h2>Login Page!</h2>
+	<div>
+		<h1 align="center">Login Page!</h1>
+	</div>
+
 	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-		<div>
+		<table align="center">
+			<tr><td>
 			<label>ID</label>
+			</td><td>
 			<input type="text" name="id" placeholder="ID"><br>
 			<span><?php echo $id_err; ?></span>
-		</div>
-		<div>	
+			</td></tr>
+
+			<tr><td>
 			<label>PW</label>
+			</td><td>
 			<input type="password" name="password" placeholder="password"><br>
-			<span><?php echo $pw_err; ?></span>		
-		</div>
-		<div>
+			<span><?php echo $pw_err; ?></span>	
+			</td></tr>	
+		</table>
+		<div align="center">
 			<button type="submit">Login</button>
 			<button type="button" onclick="location.href='register.php'">register</button>
 		</div>
