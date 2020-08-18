@@ -2,27 +2,43 @@
 
 
 	require_once "config.php";
+	session_start();
 
-	if(isset($_POST['id']) && isset($_POST['password'])){
+	if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-		$id = $_POST['id'];
-		$pw = $_POST['password'];
-	}
+		if(empty(trim($_POST['id']))){
+			$id_err = "아이디를 입력해 주세요.";
+		}
+		else{
+			$id = $_POST['id'];
+		}
 
-	$sql="select * from userinfo where id='$id'&&PW='$pw'";
-	
-	if($res=mysqli_fetch_array(mysqli_query($link,$sql))){
+		if(empty(trim($_POST['password']))){
+			$pw_err = "패스워드를 입력해 주세요.";
+		}
+		else{
+			$pw = trim($_POST['password']);
+		}
+
+		if(empty($id_err)&&empty($pw_err)){
+
+			$sql = "select * from userinfo where id='".$id."' AND PW='".$pw."'";
+			$res = mysqli_query($link,$sql);
+			
+			$row = mysqli_fetch_array($res);
+
+			if($row != null){
+				$_SESSION['userid'] = $id;
+				echo "<script>document.location.href='welcome.php'</script>";
+			}
+			
+			if($row == null){
+				echo "<script>alert('아이디나 패스워드를 확인해주세요.');</script>";
+			}
 		
-		$_SESSION['userid']=$id;
-		
-		echo "<script>alert('로그인 성공!');document.location('welcom.php');<script>";
+		}
+
 	}
-	else{
-		echo "<script>alert('아이디나 패스워드를 확인해주세요.');</script>";
-	}
-
-
-
 
 ?>
 
@@ -33,14 +49,22 @@
 <title>LOGIN</title>
 </head>
 <body>
-<h2>Login Page!</h2>
-<form method="POST">
-<label>ID</label>
-<input type="text" name="id" placeholder="ID"><br>
-<label>PW</label>
-<input type="password" name="password" placeholder="password"><br><br>
-<button type="submit">Login</button>
-<button type="button" onclick="location.href='register.php'">register</button>
+	<h2>Login Page!</h2>
+	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<div>
+			<label>ID</label>
+			<input type="text" name="id" placeholder="ID"><br>
+			<span><?php echo $id_err; ?></span>
+		</div>
+		<div>	
+			<label>PW</label>
+			<input type="password" name="password" placeholder="password"><br>
+			<span><?php echo $pw_err; ?></span>		
+		</div>
+		<div>
+			<button type="submit">Login</button>
+			<button type="button" onclick="location.href='register.php'">register</button>
+		</div>
 
 </body>
 </html>
