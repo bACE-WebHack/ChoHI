@@ -5,21 +5,21 @@ require_once "config.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	if(empty(trim($_POST['id']))){
+	if(!isset(trim($_POST['id']))){
 		$id_err = "아이디를 입력해 주세요.";
 	}
 	else{
 		$id = $_POST['id'];
 	}
 
-	if(empty(trim($_POST['name']))){
+	if(!isset(trim($_POST['name']))){
 		$name_err = "이름을 입력해 주세요.";
 	}
 	else{
 		$name = $_POST['name'];
 	}
 
-	if(empty(trim($_POST['pw']))){
+	if(!isset(trim($_POST['pw']))){
 		$pw_err = "패스워드를 입력해 주세요.";
 	}
 	else{
@@ -30,14 +30,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$pwck_err = "패스워드 값이 다릅니다.";
 	}
 
-	if(empty(trim($_POST['pn']))){
+	if(!isset(trim($_POST['pn']))){
 		$pn_err = "휴대폰 번호를 입력해주세요.";
 	}
 	else{
 		$pn = $_POST['pn'];
 	}
 
-	if(empty(trim($_POST['sex']))){
+	if(!isset(trim($_POST['sex']))){
 		$sex_err = "성별을 체크해주세요.";
 	}
 	else{
@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 
 
-	if(empty($id_err)&&empty($pw_err)&&empty($pwck_err)&&empty($pn_err)&&empty($sex_err)){
+	if(!isset($id_err)&&empty($pw_err)&&empty($pwck_err)&&empty($pn_err)&&empty($sex_err)){
 
 		$sql = "insert into userinfo value('".$id."','".$name."','".$pn."','".$pw."','".$sex."');";
 		echo $sql;
