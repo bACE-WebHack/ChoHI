@@ -1,11 +1,13 @@
 <?php
 
+include "login_ck.php";
 session_start();
+
+login_ck();
+
+
+
 	
-if(!isset($_SESSION['userid'])){
-	header("location: login.php");
-	exit;
-}
 
 ?>
 
