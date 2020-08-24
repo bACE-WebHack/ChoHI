@@ -6,21 +6,21 @@
 
 	if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-		if(empty(trim($_POST['id']))){
+		if(!isset(trim($_POST['id']))){
 			$id_err = "아이디를 입력해 주세요.";
 		}
 		else{
 			$id = $_POST['id'];
 		}
 
-		if(empty(trim($_POST['password']))){
+		if(!isset(trim($_POST['password']))){
 			$pw_err = "패스워드를 입력해 주세요.";
 		}
 		else{
 			$pw = trim($_POST['password']);
 		}
 
-		if(empty($id_err)&&empty($pw_err)){
+		if(!isset($id_err)&&empty($pw_err)){
 
 			$sql = "select * from userinfo where id='".$id."' AND PW='".$pw."'";
 			$res = mysqli_query($link,$sql);
