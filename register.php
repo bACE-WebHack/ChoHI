@@ -5,46 +5,59 @@ require_once "config.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	if(!isset(trim($_POST['id']))){
+	if(!isset(trim($_POST['id'])))
+	{
 		$id_err = "아이디를 입력해 주세요.";
 	}
-	else{
+	else
+	{
 		$id = $_POST['id'];
 	}
 
 	if(!isset(trim($_POST['name']))){
+	
 		$name_err = "이름을 입력해 주세요.";
 	}
-	else{
+	else
+	{
 		$name = $_POST['name'];
 	}
 
-	if(!isset(trim($_POST['pw']))){
+	if(!isset(trim($_POST['pw'])))
+	{
 		$pw_err = "패스워드를 입력해 주세요.";
 	}
-	else{
+	else	
+	{
 		$pw = $_POST['pw'];
 	}
 
-	if($_POST['pw'] != $_POST['pwck']){
+	if($_POST['pw'] != $_POST['pwck'])
+	{
 		$pwck_err = "패스워드 값이 다릅니다.";
 	}
 
 	if(!isset(trim($_POST['pn']))){
+	
 		$pn_err = "휴대폰 번호를 입력해주세요.";
 	}
-	else{
+	else
+	{
 		$pn = $_POST['pn'];
 	}
 
-	if(!isset(trim($_POST['sex']))){
+	if(!isset(trim($_POST['sex'])))
+	{
 		$sex_err = "성별을 체크해주세요.";
 	}
-	else{
-		if($_POST['sex']=="남자"){
+	else
+	{
+		if($_POST['sex']=="남자")
+		{
 			$sex=1;
 		}
-		else{
+		else
+		{
 			$sex=2;
 		}
 	}
