@@ -4,29 +4,39 @@
 require_once "config.php";
 session_start();
 
+if(isset($_SESSION['userid'])){
+	echo "<script>alert('이미 사용자로 로그인 되어있습니다.');location.href='welcome.php';</script>";
+
+}
+
+
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-	if(!isset(trim($_POST['id'])))
-	{
-		$id_err = "아이디를 입력해 주세요.";
-	}
-	else
+	if(isset($_POST['id']))
 	{
 		$id = $_POST['id'];
 	}
-
-	if(!isset(trim($_POST['password'])))
+	else
 	{
-		$pw_err = "패스워드를 입력해 주세요.";
+		$id_err = "아이디를 입력해 주세요.";
+			
+	}
+
+	if(isset($_POST['password']))
+	{
+		$pw = $_POST['password'];
 	}
 	else
 	{
-		$pw = trim($_POST['password']);
+	
+		$pw_err = "패스워드를 입력해 주세요.";
 	}
 
-	if(!isset($id_err)&&empty($pw_err))
+	if(isset($id_err)&&isset($pw_err))
 	{
-	
+	}
+	else
+	{
 		$sql = "select * from userinfo where id='".$id."' AND PW='".$pw."'";
 		$res = mysqli_query($link,$sql);
 			
@@ -41,8 +51,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		if($row == null)
 		{
 			echo "<script>alert('아이디나 패스워드를 확인해주세요.');</script>";
-		}		
+		}
 	}
+	
 }
 
 ?>
