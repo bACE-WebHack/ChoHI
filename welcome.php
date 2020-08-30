@@ -20,6 +20,13 @@ login_ck();
 <body>
 	<div>
 	<h1>Hi! <b><?php echo htmlspecialchars($_SESSION['userid']); ?></b></h1>
+	</div>
+	
+	<div align="right">
+		<p>
+			<a href="logout.php">Logout</a>
+		</p>
+	</div>
 
 </body>
 </html>
