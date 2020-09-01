@@ -27,6 +27,12 @@ login_ck();
 			<a href="logout.php">Logout</a>
 		</p>
 	</div>
+	<hr witdh = "150px">
+	<div align="center">
+	<?php
+		include "boardlist.php";
+	?>
+	</div>
 
 </body>
 </html>
