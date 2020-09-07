@@ -1,4 +1,9 @@
 <?php
+
+require_once "config.php";
+$sql = "select * from board order by idx desc";
+$res = mysqli_query($link, $sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,21 +49,15 @@
 			<td width = "50" align = "center">조회수</td>
 		</tr>
 	<?php
-		require_once "config.php";
-		$sql = "select * from board order by idx desc";
-		$res = mysqli_query($link, $sql);
-		$total = mysqli_num_rows($res);
-		
 		while($rows = mysqli_fetch_array($res)){
 			echo "<tr>";
 			echo "<td width = '50' align = 'center'>".$rows['idx']."</td>";
-			echo "<td width = '500' align = 'center'>".$rows['title']."</td>";
+			echo "<td width = '500' align = 'center'><a href='view.php?page=".$rows['idx']."'>".$rows['title']."</a></td>";
 			echo "<td width = '100' align = 'center'>".$rows['id']."</td>";
 			echo "<td width = '200' align = 'center'>".$rows['date']."</td>";
 			echo "<td width = '50' align = 'center'>".$rows['hit']."</td>";
 			echo "</tr>";
 		}
-
 	?>
 	</table>
 	

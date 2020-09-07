@@ -18,7 +18,7 @@ session_start();
 	$res = mysqli_query($link, $sql);
 	
 	if($res){
-		echo "<script>alert('글이 등록되었습니다.');document.location.href='boardlist.php';</script>";	
+		echo "<script>alert('글이 등록되었습니다.');document.location.href='welcome.php';</script>";	
 	}
 	else{
 		echo "FAIL";	

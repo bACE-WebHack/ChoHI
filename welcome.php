@@ -24,7 +24,7 @@ login_ck();
 	
 	<div align="right">
 		<p>
-			<a href="logout.php">Logout</a>
+			<Button type="button" onClick="location.href='logout.php'">Logout</Button>
 		</p>
 	</div>
 	<hr witdh = "150px">
