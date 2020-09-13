@@ -8,6 +8,10 @@ login_ck();
 
 $page = $_GET['page'];
 
+$sql = "update board set hit=hit+1 where idx='$page'";
+
+$res = mysqli_query($link, $sql);
+
 $sql = "select * from board where idx='".$page."';";
 
 $res = mysqli_query($link, $sql);
@@ -36,6 +40,7 @@ $hit = $rows['hit'];
 		line-height: 1.5;
 		border-top: 1px solid #ccc;
 		margin: 20px 10px;
+		width: 950px;
 	}
 	table.table2 tr{
 		width: 50px;
@@ -54,7 +59,7 @@ $hit = $rows['hit'];
 <title>Write</title>
 <body>
 	<form method="post" action="write_action.php">
-	<table style="padding-top:50px" align="center" witdh="700" border="0" cellpadding="2">
+	<table style="padding-top:50px;" align="center" witdh="700" border="0" cellpadding="2">
 		<tr>
 			<td height="20" align="center" bgcolor="#ccc">
 				<font color="white">게시판 보기</font>
@@ -66,6 +71,8 @@ $hit = $rows['hit'];
 					<tr>
 						<td>제목</td>
 						<td><?php echo $title; ?></td>
+						<td>조회수</td>
+						<td><?php echo $hit; ?></td>
 					</tr>
 					<tr>
 						<td>작성일</td>
@@ -76,23 +83,21 @@ $hit = $rows['hit'];
 					<?php
 						if($_SESSION['userid']==$id){
 
-							echo "<button type='button' onClick=\"location.href='edit.php'\">수정</button>";
-			
+							echo "<button type='button' onClick=\"location.href='edit.php?page=".$page."'\">수정</button>";
+							echo "<button type='button' onClick=\"location.href='delete.php?page=".$page."'\">삭제</button>";
+							
 						}
 					?>
 					<tr>
-						<td>내용</td>
-						<td><textarea name="content" cols="95" rows="15" disabled style="resize:none;"><?php echo $content; ?></textarea></td>
+						<td height=500px>내용</td>
+						<td><?php echo $content; ?></td>
 					</tr>
 					<tr>
-						<td>비밀번호</td>
-						<td><input type="password" name="pw" size="15" maxlength="15"></td>
+						<td>댓글</td>
+						<td><input type="textarea" name="comment" size="15" maxlength="15"></td>
+						<td><button type="submit">작성</button>
 					</tr>
 				</table>
-
-				<center>
-					<input type="submit" value="작성">
-				</center>
 			</td>
 		</tr>
 	</table>
